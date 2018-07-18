@@ -5,8 +5,18 @@ import NavigationItems from './NavigationItems';
 import NavigationItem from './NavigationItem/NavigationItem';
 configure({adapter: new Adapter});
 describe('<NavigationItems />',() => {
+    let wrapper;
+    beforeEach(() => {
+        wrapper = shallow(<NavigationItems />);
+    });
     it('should render two <NavigationITem /> elements if not authenticated',() => {
-        const wrapper = shallow(<NavigationItems/>);
         expect(wrapper.find(NavigationItem)).toHaveLength(2);
+    });
+
+    it('should render three <NavigationITem /> elements if authenticated',() => {
+        wrapper.setProps({
+            isAuthenticated:true
+        });
+        expect(wrapper.find(NavigationItem)).toHaveLength(3);
     });
 });
